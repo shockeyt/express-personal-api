@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 
 var db = require('./models');
 
+// hard coded profile object
 var myself = [
   { _id: 1, 
     name: 'Tyler', 
@@ -25,6 +26,45 @@ var myself = [
   
 ];
 
+//hard coded future seed data
+var synths = [
+{
+  _id: 1,
+  name: "Korg MS-10",
+  Polyphony: "Monophonic",
+  Keyboard_keys: 32,
+  website: "http://www.vintagesynth.com/korg/ms10.php"
+},
+{
+  _id: 2,
+  name: "Korg MS-20",
+  Polyphony: "Monophonic",
+  Keyboard_keys: 37,
+  website: "http://www.vintagesynth.com/korg/ms20.php"
+},
+{
+  _id: 3,
+  name: "ARP Odyssey",
+  Polyphony: "Monophonic",
+  Keyboard_keys: 37,
+  website: "http://www.vintagesynth.com/arp/odyssey.php"
+},
+{
+  _id: 4,
+  name: "Korg PolySix",
+  Polyphony: "Polyphonic 6 Voices",
+  Keyboard_keys: 61,
+  website: "http://www.vintagesynth.com/korg/poly6.php"
+},
+{
+  _id: 5,
+  name: "Roland Juno-106",
+  Polyphony: "Polyphonic 6 Voices",
+  Keyboard_keys: 61,
+  website: "http://www.vintagesynth.com/roland/juno106.php"
+},
+];
+
 /**********
  * ROUTES *
  **********/
@@ -33,10 +73,17 @@ var myself = [
 // i.e. `/images`, `/scripts`, `/styles`
 app.use(express.static('public'));
 
+
 //profile endpoint w hard-coded data
 app.get('/api/profile', function profile(req, res) {
   res.json({myself: myself});
 });
+
+//RESTful Routes
+app.get('/api/synths', function synthIndex(req, res) {
+  res.json({synths: synths});
+});
+
 
 
 /*
@@ -61,8 +108,8 @@ app.get('/api', function api_index(req, res) {
     base_url: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api/profile", description: "my profile page"}, // CHANGE ME
+      {method: "POST", path: "/api/synths", description: "My synthesizer info"} // CHANGE ME
     ]
   })
 });
