@@ -81,15 +81,26 @@ app.get('/api/profile', function profile(req, res) {
 
 //**** RESTful Routes ****
 
+//show all synths
+app.get('/api/synths', function (req, res) {
+  db.Synth.find()
+  .exec(function(err, synths) {
+    if (err) {return console.log("index error: " + err); }
+    res.json(synths);
+  });
+});
+
+
+//HARD CODED TESTS
 //show index
-app.get('/api/synths', function synthIndex(req, res) {
-  res.json({synths: synths});
-});
-// show single synth
-app.get('/api/synths/:id', function synthShow(req, res) {
-  var idCheck = req.params.id-1;
-  res.json(synths[idCheck]);
-});
+// app.get('/api/synths', function synthIndex(req, res) {
+//   res.json({synths: synths});
+// });
+// // show single synth
+// app.get('/api/synths/:id', function synthShow(req, res) {
+//   var idCheck = req.params.id-1;
+//   res.json(synths[idCheck]);
+// });
 
 
 /*
