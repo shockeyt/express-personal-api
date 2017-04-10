@@ -79,11 +79,17 @@ app.get('/api/profile', function profile(req, res) {
   res.json({myself: myself});
 });
 
-//RESTful Routes
+//**** RESTful Routes ****
+
+//show index
 app.get('/api/synths', function synthIndex(req, res) {
   res.json({synths: synths});
 });
-
+// show single synth
+app.get('/api/synths/:id', function synthShow(req, res) {
+  var idCheck = req.params.id-1;
+  res.json(synths[idCheck]);
+});
 
 
 /*
