@@ -6,4 +6,4 @@ mongoose.connect( process.env.MONGODB_URI ||
 
 // mongoose.connect( process.env.MONGODB_URI || "https://whispering-garden-62967.herokuapp.com/" );
 
-// module.exports.Campsite = require("./campsite.js.example");
+module.exports.Campsite = require("./campsite.js.example");
