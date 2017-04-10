@@ -14,6 +14,17 @@ app.use(bodyParser.json());
 
 var db = require('./models');
 
+var myself = [
+  { _id: 1, 
+    name: 'Tyler', 
+    github_link: 'https://github.com/shockeyt', 
+    github_profile_image: 'https://avatars3.githubusercontent.com/u/25995018?v=3&s=460', 
+    current_city: 'Arvada', 
+    pets: [{name: 'Gus', type: 'Dog', breed: 'Goldendoodle'}]
+  }
+  
+];
+
 /**********
  * ROUTES *
  **********/
@@ -21,6 +32,12 @@ var db = require('./models');
 // Serve static files from the `/public` directory:
 // i.e. `/images`, `/scripts`, `/styles`
 app.use(express.static('public'));
+
+//profile endpoint w hard-coded data
+app.get('/api/profile', function profile(req, res) {
+  res.json({myself: myself});
+});
+
 
 /*
  * HTML Endpoints
