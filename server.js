@@ -27,43 +27,43 @@ var myself = [
 ];
 
 //hard coded future seed data
-var synths = [
-{
-  _id: 1,
-  name: "Korg MS-10",
-  Polyphony: "Monophonic",
-  Keyboard_keys: 32,
-  website: "http://www.vintagesynth.com/korg/ms10.php"
-},
-{
-  _id: 2,
-  name: "Korg MS-20",
-  Polyphony: "Monophonic",
-  Keyboard_keys: 37,
-  website: "http://www.vintagesynth.com/korg/ms20.php"
-},
-{
-  _id: 3,
-  name: "ARP Odyssey",
-  Polyphony: "Monophonic",
-  Keyboard_keys: 37,
-  website: "http://www.vintagesynth.com/arp/odyssey.php"
-},
-{
-  _id: 4,
-  name: "Korg PolySix",
-  Polyphony: "Polyphonic 6 Voices",
-  Keyboard_keys: 61,
-  website: "http://www.vintagesynth.com/korg/poly6.php"
-},
-{
-  _id: 5,
-  name: "Roland Juno-106",
-  Polyphony: "Polyphonic 6 Voices",
-  Keyboard_keys: 61,
-  website: "http://www.vintagesynth.com/roland/juno106.php"
-},
-];
+// var synths = [
+// {
+//   _id: 1,
+//   name: "Korg MS-10",
+//   Polyphony: "Monophonic",
+//   Keyboard_keys: 32,
+//   website: "http://www.vintagesynth.com/korg/ms10.php"
+// },
+// {
+//   _id: 2,
+//   name: "Korg MS-20",
+//   Polyphony: "Monophonic",
+//   Keyboard_keys: 37,
+//   website: "http://www.vintagesynth.com/korg/ms20.php"
+// },
+// {
+//   _id: 3,
+//   name: "ARP Odyssey",
+//   Polyphony: "Monophonic",
+//   Keyboard_keys: 37,
+//   website: "http://www.vintagesynth.com/arp/odyssey.php"
+// },
+// {
+//   _id: 4,
+//   name: "Korg PolySix",
+//   Polyphony: "Polyphonic 6 Voices",
+//   Keyboard_keys: 61,
+//   website: "http://www.vintagesynth.com/korg/poly6.php"
+// },
+// {
+//   _id: 5,
+//   name: "Roland Juno-106",
+//   Polyphony: "Polyphonic 6 Voices",
+//   Keyboard_keys: 61,
+//   website: "http://www.vintagesynth.com/roland/juno106.php"
+// },
+// ];
 
 /**********
  * ROUTES *
@@ -86,6 +86,13 @@ app.get('/api/synths', function (req, res) {
   db.Synth.find();
 
     res.json(synths);
+});
+
+//get one synth
+app.get('/api/synths/:id', function (req, res) {
+  db.Synth.findOne({_id: req.params.id}, function(err, synths) {
+    res.json(synths);
+  });
 });
 
 
