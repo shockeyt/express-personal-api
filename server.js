@@ -105,8 +105,9 @@ app.post('/api/synths', function (req, res) {
     name: req.body.name,
     Polyphony: req.body.Polyphony,
     Keyboard_keys: req.body.Keyboard_keys,
-    website: website
+    website: req.body.website
   });
+
   newSynth.save(function(err, synth) {
     if (err) {
       return console.log("save error: " + err);
