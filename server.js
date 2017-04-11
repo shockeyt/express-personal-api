@@ -83,10 +83,15 @@ app.get('/api/profile', function profile(req, res) {
 
 //show all synths
 app.get('/api/synths', function (req, res) {
-  db.Synth.find({}, function(err, synths) {
-    if (err) {
-      console.log("Error: ", err);
-    }
+  // db.Synth.find({}, function(err, synths) {
+  //   if (err) {
+  //     console.log("Error: ", err);
+  //   }
+  //   res.json(synths);
+  // });
+  db.Synth.find()
+  .exec(function(err, synths) {
+    if (err) { return console.log("index error: " + err); }
     res.json(synths);
   });
 
