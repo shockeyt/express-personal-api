@@ -117,6 +117,15 @@ app.post('/api/synths', function (req, res) {
   });
 });
 
+//delete synth
+app.delete('/api/synths/:id', function (req, res) {
+  console.log('synths delete', req.params);
+  var synthId = req.params.id;
+  db.Synth.findOneAndRemove({ _id: synthId }, function (err, deletedSynth) {
+    res.json(deletedSynth);
+  });
+});
+
 
 //HARD CODED TESTS
 //show index
