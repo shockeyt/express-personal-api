@@ -119,16 +119,32 @@ app.post('/api/synths', function (req, res) {
 
 //update synth
 app.put('/api/synths/:id', function (req, res) {
-  changeSynth = req.params.id;
-  db.Synth.findOne({_id: changeSynth}, function(err, synths) {
-    if (req.body.id == changeSynth) {
-      synths.name = req.body.name;
-      synths.Polyphony = req.body.Polyphony;
-      synths.Keyboard_keys = req.body.Keyboard_keys;
-      synths.website = req.body.website;
-      res.json(req.body);
+  // changeSynth = req.params.id;
+  // db.Synth.findOne({_id: changeSynth}, function(err, synths) {
+  //   if (req.body.id == changeSynth) {
+  //     synths.name = req.body.name;
+  //     synths.Polyphony = req.body.Polyphony;
+  //     synths.Keyboard_keys = req.body.Keyboard_keys;
+  //     synths.website = req.body.website;
+  //     res.json(req.body);
+  //   }
+  // });
+  var updateSynth;
+
+  db.Synth.findOne({_id: req.params.id}, function(err, synths) {
+    if (req.params.id == req.body.id) {
+    var updateSynth = req.body;
+    synths.name = req.body.name;
+    synths.Polyphony = req.body.Polyphony;
+    synths.Keyboard_keys = req.body.Keyboard_keys;
+    synths.website = req.body.website;
+    updateSynth.save(function(err, synth) {
+      res.json(synth);
+    });
     }
+
   });
+
 });
 
 //delete synth
