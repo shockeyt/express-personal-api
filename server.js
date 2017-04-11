@@ -16,12 +16,13 @@ var db = require('./models');
 
 // hard coded profile object
 var myself = [
-  { _id: 1, 
+  { 
     name: 'Tyler', 
     github_link: 'https://github.com/shockeyt', 
     github_profile_image: 'https://avatars3.githubusercontent.com/u/25995018?v=3&s=460', 
     current_city: 'Arvada', 
-    pets: [{name: 'Gus', type: 'Dog', breed: 'Goldendoodle'}]
+    pets: [{name: 'Gus', type: 'Dog', breed: 'Goldendoodle'},
+    {name: 'Phil', type: 'Imaginary', breed: 'Unicorn'}]
   }
   
 ];
@@ -136,56 +137,6 @@ app.put('/api/synths/:id', function (req, res) {
       res.json({message: 'synth updated'});
     });
   });
-
-  // db.Synth.findOne({_id: req.params.id}, function(err, data) {
-  //   //add for each
-  //   if (req.params.id == req.body._id) {
-    
-  //     var updateSynth = new db.Synth({
-  //         name: req.body.name,
-  //         Polyphony: req.body.Polyphony,
-  //         Keyboard_keys: req.body.Keyboard_keys,
-  //         website: req.body.website
-
-  //     });
-  //     console.log(updateSynth);
-      
-  //     updateSynth.save(function(err, synth) {
-  //       if (err) {
-  //         return console.log("save error: " + err);
-  //       }
-  //       console.log("updated: " + updateSynth.name);
-  //       res.json(synth);
-  //     });
-  //   }
-
-  
-
-
-
-  //   var updateSynth;
-  //   if (req.params.id == req.body._id) {
-  //   updateSynth = req.body;
-  //   updateSynth.name = req.body.name;
-  //   console.log(updateSynth.name);
-  //   updateSynth.Polyphony = req.body.Polyphony;
-  //   console.log(updateSynth.Polyphony);
-  //   updateSynth.Keyboard_keys = req.body.Keyboard_keys;
-  //   console.log(updateSynth.Keyboard_keys);
-  //   updateSynth.website = req.body.website;
-  //   console.log(updateSynth.website);
-
-  //   updateSynth.save(function(err, synth) {
-  //     res.json(synth);
-  //   });
-
-  //   }
-  //   // res.json(updateSynth);
-  //   // console.log(req.body);
-  //   // console.log(req.params.id);
-  //   // console.log(req.body._id);
-  // });
-
 });
 
 //delete synth
@@ -226,14 +177,18 @@ app.get('/', function homepage(req, res) {
 app.get('/api', function api_index(req, res) {
   // TODO: Document all your api endpoints below
   res.json({
-    woops_i_has_forgot_to_document_all_my_endpoints: true, // CHANGE ME ;)
-    message: "Welcome to my personal api! Here's what you need to know!",
-    documentation_url: "https://github.com/example-username/express_self_api/README.md", // CHANGE ME
-    base_url: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
+    //woops_i_has_forgot_to_document_all_my_endpoints: true, // CHANGE ME ;)
+    message: "Welcome to my SNAZZY personal api! Here's what you need to know!",
+    documentation_url: "https://github.com/shockeyt/express-personal-api/README.md",
+    base_url: "https://whispering-garden-62967.herokuapp.com",
     endpoints: [
-      {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "my profile page"}, // CHANGE ME
-      {method: "POST", path: "/api/synths", description: "My synthesizer info"} // CHANGE ME
+      {method: "GET", path: "/api", description: "Describes all my available endpoints"},
+      {method: "GET", path: "/api/profile", description: "my profile page with my petz"},
+      {method: "GET", path: "/api/synths", description: "My synthesizer index"},
+      {method: "GET", path: "/api/synths/:id", description: "Select an individual synth"},
+      {method: "POST", path: "/api/synths", description: "Create a new synth"},
+      {method: "PUT", path: "/api/synths/:id", description: "Update a current synth by ID"},
+      {method: "DELETE", path: "/api/synths/:id", description: "Delete a synth"}
     ]
   })
 });
