@@ -83,9 +83,13 @@ app.get('/api/profile', function profile(req, res) {
 
 //show all synths
 app.get('/api/synths', function (req, res) {
-  db.Synth.find();
-
+  db.Synth.find({}, function(err, synths) {
+    if (err) {
+      console.log("Error: ", err);
+    }
     res.json(synths);
+  });
+
 });
 
 //get one synth
