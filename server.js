@@ -179,7 +179,7 @@ app.get('/api', function api_index(req, res) {
   res.json({
     //woops_i_has_forgot_to_document_all_my_endpoints: true, // CHANGE ME ;)
     message: "Welcome to my SNAZZY personal api! Here's what you need to know!",
-    documentation_url: "https://github.com/shockeyt/express-personal-api/README.md",
+    documentation_url: "https://github.com/shockeyt/express-personal-api/blob/master/README.md",
     base_url: "https://whispering-garden-62967.herokuapp.com",
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all my available endpoints"},
