@@ -95,6 +95,7 @@ app.get('/api/synths', function (req, res) {
 //get one synth
 app.get('/api/synths/:id', function (req, res) {
   db.Synth.findOne({_id: req.params.id}, function(err, synths) {
+    console.log(req.params.id);
     res.json(synths);
   });
 });
@@ -113,37 +114,77 @@ app.post('/api/synths', function (req, res) {
       return console.log("save error: " + err);
     }
     console.log("saved ", synth.name);
+    console.log(req.body);
     res.json(synth);
   });
 });
 
 //update synth
 app.put('/api/synths/:id', function (req, res) {
-  // changeSynth = req.params.id;
-  // db.Synth.findOne({_id: changeSynth}, function(err, synths) {
-  //   if (req.body.id == changeSynth) {
-  //     synths.name = req.body.name;
-  //     synths.Polyphony = req.body.Polyphony;
-  //     synths.Keyboard_keys = req.body.Keyboard_keys;
-  //     synths.website = req.body.website;
-  //     res.json(req.body);
-  //   }
-  // });
-  var updateSynth;
 
-  db.Synth.findOne({_id: req.params.id}, function(err, synths) {
-    if (req.params.id == req.body.id) {
-    var updateSynth = req.body;
-    synths.name = req.body.name;
-    synths.Polyphony = req.body.Polyphony;
-    synths.Keyboard_keys = req.body.Keyboard_keys;
-    synths.website = req.body.website;
-    updateSynth.save(function(err, synth) {
-      res.json(synth);
+  var id = req.params.id;
+
+  db.Synth.findOne({_id: id}, function(err, synth) {
+    if (err) res.json({message: 'find error: ' + err});
+    if(req.body.name) synth.name = req.body.name;
+    if(req.body.Polyphony) synth.Polyphony = req.body.Polyphony;
+    if(req.body.Keyboard_keys) synth.Keyboard_keys = req.body.Keyboard_keys;
+    if(req.body.website) synth.website = req.body.website;
+
+    synth.save(function(err) {
+      if(err) res.json({message: 'could not update'});
+      res.json({message: 'synth updated'});
     });
-    }
-
   });
+
+  // db.Synth.findOne({_id: req.params.id}, function(err, data) {
+  //   //add for each
+  //   if (req.params.id == req.body._id) {
+    
+  //     var updateSynth = new db.Synth({
+  //         name: req.body.name,
+  //         Polyphony: req.body.Polyphony,
+  //         Keyboard_keys: req.body.Keyboard_keys,
+  //         website: req.body.website
+
+  //     });
+  //     console.log(updateSynth);
+      
+  //     updateSynth.save(function(err, synth) {
+  //       if (err) {
+  //         return console.log("save error: " + err);
+  //       }
+  //       console.log("updated: " + updateSynth.name);
+  //       res.json(synth);
+  //     });
+  //   }
+
+  
+
+
+
+  //   var updateSynth;
+  //   if (req.params.id == req.body._id) {
+  //   updateSynth = req.body;
+  //   updateSynth.name = req.body.name;
+  //   console.log(updateSynth.name);
+  //   updateSynth.Polyphony = req.body.Polyphony;
+  //   console.log(updateSynth.Polyphony);
+  //   updateSynth.Keyboard_keys = req.body.Keyboard_keys;
+  //   console.log(updateSynth.Keyboard_keys);
+  //   updateSynth.website = req.body.website;
+  //   console.log(updateSynth.website);
+
+  //   updateSynth.save(function(err, synth) {
+  //     res.json(synth);
+  //   });
+
+  //   }
+  //   // res.json(updateSynth);
+  //   // console.log(req.body);
+  //   // console.log(req.params.id);
+  //   // console.log(req.body._id);
+  // });
 
 });
 
