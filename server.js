@@ -83,12 +83,7 @@ app.get('/api/profile', function profile(req, res) {
 
 //show all synths
 app.get('/api/synths', function (req, res) {
-  // db.Synth.find({}, function(err, synths) {
-  //   if (err) {
-  //     console.log("Error: ", err);
-  //   }
-  //   res.json(synths);
-  // });
+
   db.Synth.find()
   .exec(function(err, synths) {
     if (err) { return console.log("index error: " + err); }
@@ -101,6 +96,23 @@ app.get('/api/synths', function (req, res) {
 app.get('/api/synths/:id', function (req, res) {
   db.Synth.findOne({_id: req.params.id}, function(err, synths) {
     res.json(synths);
+  });
+});
+
+//create new synth
+app.post('/api/synths', function (req, res) {
+  var newSynth = new db.Synth({
+    name: req.body.name,
+    Polyphony: req.body.Polyphony,
+    Keyboard_keys: req.body.Keyboard_keys,
+    website: website
+  });
+  newSynth.save(function(err, synth) {
+    if (err) {
+      return console.log("save error: " + err);
+    }
+    console.log("saved ", synth.name);
+    res.json(synth);
   });
 });
 
